@@ -1,18 +1,31 @@
-FROM ubuntu
+FROM gcc:4.9
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get upgrade -y
+RUN apt-get update && apt-get -y install \
+  rsync \
+  vim && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
-#// Git, Vim, CMake, GCC
-RUN apt-get install -y git
-RUN apt-get install -y vim
-RUN apt-get install -y wget
-RUN wget https://launchpad.net/ubuntu/+source/cmake/2.8.8-2ubuntu1/+build/3441442/+files/cmake_2.8.8-2ubuntu1_amd64.deb
-RUN wget https://launchpad.net/ubuntu/+archive/primary/+files/cmake-data_2.8.8-2ubuntu1_all.deb
-RUN apt-get remove cmake-data cmake
-RUN apt-get install -y emacsen-common libarchive12 libxmlrpc-core-c3
-RUN dpkg --install cmake-data_2.8.8-2ubuntu1_all.deb cmake_2.8.8-2ubuntu1_amd64.deb
-RUN apt-get install -y build-essential
 
+# Build and install CMake from source.
+WORKDIR /usr/src
+RUN git clone git://cmake.org/cmake.git CMake && \
+  cd CMake && \
+  git checkout v3.3.0-rc2
+RUN mkdir CMake-build
+WORKDIR /usr/src/CMake-build
+RUN /usr/src/CMake/bootstrap \
+    --parallel=$(nproc) \
+    --prefix=/usr && \
+  make -j$(nproc) install && \
+  rm -rf *
+WORKDIR /usr/src
+
+# Build and install Ninja from source
+RUN git clone https://github.com/martine/ninja.git && \
+  cd ninja && \
+  git checkout v1.5.3 && \
+  python ./configure.py --bootstrap && \
+  ./ninja && \
+  cp ./ninja /usr/bin/

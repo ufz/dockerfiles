@@ -1,4 +1,12 @@
-FROM bilke/dev-essentials
+FROM bilke/ogs-base
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
-RUN apt-get install -y libboost-dev libboost-date-time-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libeigen3-dev
+# Build and install Catalyst-edition from source.
+WORKDIR /usr/src
+RUN git clone https://github.com/ufz/catalyst-io.git catalyst
+RUN mkdir catalyst-build
+WORKDIR /usr/src/catalyst-build
+RUN ../catalyst/cmake.sh ../catalyst && \
+  make -j$(nproc)
+
+ENV ParaView_DIR /usr/src/catalyst-build

@@ -1,4 +1,4 @@
-FROM bilke/ogs-base
+FROM ogs6/base
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 # Build and install Catalyst-edition from source.

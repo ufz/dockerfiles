@@ -1,4 +1,4 @@
-FROM bilke/dev-essentials
+FROM ogs6/dev-essentials
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update && apt-get install -y \

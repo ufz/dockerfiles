@@ -60,7 +60,4 @@ WORKDIR /usr/src/mxe
 COPY settings.mk /usr/src/mxe/
 RUN make -j$(nproc)
 
-WORKDIR /usr/src/mxe
-RUN make boost pthreads vtk6
-
 WORKDIR /usr/src

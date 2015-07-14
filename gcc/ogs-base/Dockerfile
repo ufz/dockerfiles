@@ -1,4 +1,4 @@
-FROM ogs6/dev-essentials
+FROM ogs6/gcc-dev-essentials
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update && apt-get install -y \
@@ -10,3 +10,5 @@ RUN apt-get update && apt-get install -y \
   libeigen3-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src

@@ -29,3 +29,5 @@ RUN git clone https://github.com/martine/ninja.git && \
   python ./configure.py --bootstrap && \
   ./ninja && \
   cp ./ninja /usr/bin/
+
+WORKDIR /usr/src

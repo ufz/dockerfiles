@@ -1,33 +1,35 @@
-FROM gcc:4.9
+FROM ubuntu:14.04
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
-RUN apt-get update && apt-get -y install \
-  rsync \
-  vim && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+  && apt-get -y install \
+    software-properties-common \
+    wget \
+    vim \
+  && echo 'deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main' >> /etc/apt/sources.list \
+  && wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add - \
+  && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
+  && apt-get update \
+  && apt-get install -y \
+    make \
+    git \
+    curl \
+  && apt-get install -y \
+    gcc-4.9 \
+    g++-4.9 \
+    gcc-4.9-base \
+  && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100 \
+  && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100 \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 
 # Build and install CMake from source.
-WORKDIR /usr/src
-RUN git clone git://cmake.org/cmake.git CMake && \
-  cd CMake && \
-  git checkout v3.3.0-rc2
-RUN mkdir CMake-build
-WORKDIR /usr/src/CMake-build
-RUN /usr/src/CMake/bootstrap \
-    --parallel=$(nproc) \
-    --prefix=/usr && \
-  make -j$(nproc) install && \
-  rm -rf *
-WORKDIR /usr/src
-
-# Build and install Ninja from source
-RUN git clone https://github.com/martine/ninja.git && \
-  cd ninja && \
-  git checkout v1.5.3 && \
-  python ./configure.py --bootstrap && \
-  ./ninja && \
-  cp ./ninja /usr/bin/
-
+RUN         curl -O http://www.cmake.org/files/v3.2/cmake-3.2.3.tar.gz \
+                && tar -xvf cmake-3.2.3.tar.gz
+WORKDIR     cmake-3.2.3
+RUN         ./bootstrap \
+                && make -j$(nproc) \
+                && make install \
+                && rm -rf *
 WORKDIR /usr/src

@@ -17,6 +17,9 @@ RUN wget http://llvm.org/releases/3.6.1/clang+llvm-3.6.1-x86_64-linux-gnu-ubuntu
   cp -r clang+llvm-3.6.1-x86_64-linux-gnu/* /usr/ && \
   rm -rf clang+llvm-3.6.1-x86_64-linux-gnu*
 
+ENV CC=clang
+ENV CXX=clang++
+
 # Build and install CMake from source.
 WORKDIR /usr/src
 RUN git clone git://cmake.org/cmake.git CMake && \

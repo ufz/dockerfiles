@@ -1,8 +1,9 @@
-FROM ogs6/mingw-gcc
+FROM ogs6/mingw-32-gcc
 MAINTAINER Lars Bilke "lars.bilke@ufz.de"
 
 WORKDIR /usr/src/mxe
 COPY settings.mk /usr/src/mxe/
+COPY vtk6-no-qt.mk /usr/src/mxe/src/vtk6.mk
 RUN make -j$(nproc)
 
 # Add user jenkins to the image

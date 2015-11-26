@@ -37,7 +37,9 @@ RUN apt-get update && apt-get -y install \
   unzip \
   wget \
   wine \
-  xz-utils && \
+  xz-utils \
+  p7zip-full \
+  libgdk-pixbuf2.0-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
@@ -47,12 +49,8 @@ RUN dpkg --add-architecture i386 && \
   apt-get install -y wine32 && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
-ENV WINEARCH win64
-RUN wine hostname
 
 WORKDIR /usr/src
 # mxe master prior to mingw-w64 update, based on GCC 4
 # with boost fix (a8df43d1)
-RUN git clone https://github.com/mxe/mxe.git && \
-  cd mxe && \
-  git checkout a8df43d1
+RUN git clone https://github.com/mxe/mxe.git

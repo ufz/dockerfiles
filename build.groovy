@@ -14,6 +14,8 @@ node('docker') {
 
 	stage "Building MinGW images"
 	docker.build "ogs6/mingw-dev-essentials:latest", "mingw/dev-essentials"
-	docker.build "ogs5/mingw-ogs-base:latest", "mingw/ogs5-base"
+	docker.build "ogs5/mingw-gcc:latest", "mingw/gcc"
 	docker.build "ogs6/mingw-ogs-gui:latest", "mingw/ogs-gui"
+	docker.build "ogs6/mingw-32-gcc:latest" "mingw-32/gcc"
+	docker.build "ogs6/mingw-32-ogs-base:latest" "mingw-32/ogs-base"
 }

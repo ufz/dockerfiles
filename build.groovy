@@ -11,6 +11,7 @@ node('docker') {
 
 	stage "Building Clang images"
 	docker.build "ogs6/clang-dev-essentials:latest", "clang/dev-essentials"
+	docker.build "ogs6/clang-ogs-base:latest", "clang/ogs-base"
 
 	stage "Building MinGW images"
 	docker.build "ogs6/mingw-dev-essentials:latest", "mingw/dev-essentials"

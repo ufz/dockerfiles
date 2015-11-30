@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:15.10
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update && apt-get -y install \
@@ -11,20 +11,21 @@ RUN apt-get update && apt-get -y install \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-# Install clang 3.6.1
-RUN wget http://llvm.org/releases/3.6.1/clang+llvm-3.6.1-x86_64-linux-gnu-ubuntu-14.04.tar.xz && \
-  tar -xvf clang+llvm-3.6.1-x86_64-linux-gnu-ubuntu-14.04.tar.xz && \
-  cp -r clang+llvm-3.6.1-x86_64-linux-gnu/* /usr/ && \
-  rm -rf clang+llvm-3.6.1-x86_64-linux-gnu*
+# Install clang
+RUN wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key| apt-key add - && \
+  apt-get update && \
+  apt-get -y install clang-3.7 lldb-3.7 && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
-ENV CC=clang
-ENV CXX=clang++
+ENV CC=clang-3.7
+ENV CXX=clang++-3.7
 
 # Build and install CMake from source.
 WORKDIR /usr/src
-RUN git clone git://cmake.org/cmake.git CMake && \
+RUN git clone https://github.com/Kitware/CMake.git CMake && \
   cd CMake && \
-  git checkout v3.3.0-rc2
+  git checkout v3.4.0
 RUN mkdir CMake-build
 WORKDIR /usr/src/CMake-build
 RUN /usr/src/CMake/bootstrap \
@@ -37,7 +38,7 @@ WORKDIR /usr/src
 # Build and install Ninja from source
 RUN git clone https://github.com/martine/ninja.git && \
   cd ninja && \
-  git checkout v1.5.3 && \
+  git checkout v1.6.0 && \
   python ./configure.py --bootstrap && \
   ./ninja && \
   cp ./ninja /usr/bin/

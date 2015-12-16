@@ -1,6 +1,5 @@
 docker build -t ogs6/gcc-dev-essentials:latest gcc/dev-essentials
 docker build -t ogs6/gcc-ogs-base:latest gcc/ogs-base
-docker build -t ogs6/gcc-ogs-cli:latest gcc/ogs-cli
 docker build -t ogs6/gcc-ogs-gui:latest gcc/ogs-gui
 
 docker build -t ogs6/clang-dev-essentials:latest clang/dev-essentials

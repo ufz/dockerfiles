@@ -23,8 +23,9 @@ RUN cmake ../VTK-6.3.0 \
   -DCMAKE_INSTALL_PREFIX=/usr/local \
   -DBUILD_TESTING=OFF \
   -DModule_vtkIOParallelXML=ON && \
-  make -j$(nproc) install && \
-  rm -rf *
+  make -j$(nproc) install && make clean
 
 WORKDIR /usr/src
 RUN rm -rf vtk-build VTK-6.3.0
+
+ENV LD_LIBRAY_PATH=/usr/local/lib:$LD_LIBRARY_PATH

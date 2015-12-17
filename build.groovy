@@ -2,7 +2,7 @@ node('docker') {
 	stage "Checkout"
 	git 'https://github.com/ufz/dockerfiles'
 
-	docker.withRegistry('', 'dockerHubId')
+	docker.withRegistry("", "dockerHubId")
 
 	stage "Building GCC images"
 	def image = docker.build "ogs6/gcc-dev-essentials:latest", "gcc/dev-essentials"

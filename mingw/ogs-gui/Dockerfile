@@ -1,4 +1,4 @@
-FROM ogs6/mingw-gcc
+FROM ogs5/mingw-gcc
 MAINTAINER Lars Bilke "lars.bilke@ufz.de"
 
 WORKDIR /usr/src/mxe

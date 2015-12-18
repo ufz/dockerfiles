@@ -28,4 +28,4 @@ RUN cmake ../VTK-6.3.0 \
 WORKDIR /usr/src
 RUN rm -rf vtk-build VTK-6.3.0
 
-ENV LD_LIBRAY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH

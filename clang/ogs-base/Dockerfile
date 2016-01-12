@@ -12,7 +12,7 @@ WORKDIR /usr/src
 RUN curl -L -o boost_1_56_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.gz/download && \
   tar -xzf boost_1_56_0.tar.gz && \
   rm boost_1_56_0.tar.gz
-ENV BOOST_ROOT=/usr/src/boost_1_56_0
+ENV Boost_DIR=/usr/src/boost_1_56_0
 
 WORKDIR /usr/src
 RUN wget http://www.vtk.org/files/release/6.3/VTK-6.3.0.tar.gz && \

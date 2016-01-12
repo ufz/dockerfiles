@@ -24,12 +24,12 @@ node('docker') {
 		image = docker.build "ogs6/mingw-dev-essentials:latest", "mingw/dev-essentials"
 		image.push()
 		image = docker.build "ogs5/mingw-gcc:latest", "mingw/gcc"
-		image.push()
+		// image.push()
 		image = docker.build "ogs6/mingw-ogs-gui:latest", "mingw/ogs-gui"
 		// image.push() // too large for docker hub
 		image = docker.build "ogs6/mingw-32-gcc:latest" "mingw-32/gcc"
-		image.push()
+		// image.push()
 		image = docker.build "ogs6/mingw-32-ogs-base:latest" "mingw-32/ogs-base"
-		image.push()
+		// image.push()
 	}
 }

@@ -31,3 +31,8 @@ WORKDIR /usr/src
 RUN rm -rf vtk-build VTK-6.3.0
 
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
+RUN apt-get update && apt-get install -y \
+  time && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*

@@ -14,6 +14,7 @@ RUN apt-get update \
     make \
     git \
     curl \
+    ccache \
   && apt-get install -y \
     gcc-4.9 \
     g++-4.9 \
@@ -25,21 +26,20 @@ RUN apt-get update \
 
 
 # Build and install CMake from source.
-RUN         curl -O https://cmake.org/files/v3.4/cmake-3.4.0.tar.gz \
-                && tar -xvf cmake-3.4.0.tar.gz
-WORKDIR     cmake-3.4.0
-RUN         ./bootstrap \
-                && make -j$(nproc) \
-                && make install \
-                && rm -rf *
+RUN curl -O https://cmake.org/files/v3.4/cmake-3.4.2.tar.gz \
+  && tar -xvf cmake-3.4.2.tar.gz \
+  && cd cmake-3.4.2 \
+  && ./bootstrap \
+  && make -j$(nproc) \
+  && make install \
+  && rm -rf * \
+  && cd .. && rm -rf cmake-*
 
 # Add user jenkins to the image
-RUN adduser --uid 500 --quiet jenkins
-
-# Add user jenkins to sudoers with NOPASSWD
-RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-# Set password for the jenkins user (you may want to alter this).
-RUN echo "jenkins:jenkins" | chpasswd
+RUN adduser --uid 500 --quiet jenkins \
+  # Add user jenkins to sudoers with NOPASSWD
+  && echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+  # Set password for the jenkins user (you may want to alter this).
+  && RUN echo "jenkins:jenkins" | chpasswd
 
 WORKDIR /usr/src

@@ -1,56 +1,32 @@
-FROM thewtex/cross-compiler-base
-MAINTAINER Lars Bilke "lars.bilke@ufz.de"
+FROM ubuntu:14.04
+MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
-# WINE is used as an emulator for try_run and tests with CMake.
-# Other dependencies are from the listed MXE requirements:
-#   http://mxe.cc/#requirements
-# 'cmake' is omitted because it is installed from source in the base image
+RUN echo "deb http://pkg.mxe.cc/repos/apt/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mxeapt.list \
+  && apt-key adv --keyserver x-hkp://keys.gnupg.net --recv-keys D43A795B73B16ABE9643FE1AFD8FFF16DB45C6AB
+
 RUN apt-get update && apt-get -y install \
-  autoconf \
-  automake \
-  autopoint \
-  bash \
-  bison \
-  bzip2 \
-  flex \
-  gettext \
   git \
-  g++ \
-  g++-multilib \
-  gperf \
-  intltool \
-  libffi-dev \
-  libtool-bin \
-  libltdl-dev \
-  libssl-dev \
-  libxml-parser-perl \
-  libc6-dev-i386 \
-  make \
-  openssl \
-  patch \
-  perl \
-  pkg-config \
-  python \
-  ruby \
-  scons \
-  sed \
-  unzip \
   wget \
-  wine \
-  xz-utils \
-  p7zip-full \
-  libgdk-pixbuf2.0-dev && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+  rsync \
+  vim \
+  mxe-x86-64-w64-mingw32.static-gcc \
+  mxe-x86-64-w64-mingw32.static-dlfcn \
+  mxe-i686-w64-mingw32.static-gcc \
+  mxe-i686-w64-mingw32.static-dlfcn \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
-# Set up wine
-RUN dpkg --add-architecture i386 && \
-  apt-get update && \
-  apt-get install -y wine32 && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+ENV CMAKE_TOOLCHAIN_FILE /usr/lib/mxe/usr/x86_64-w64-mingw32.static/share/cmake/mxe-conf.cmake
+ENV CMAKE_TOOLCHAIN_FILE_32 /usr/lib/mxe/usr/i686-w64-mingw32.static/share/cmake/mxe-conf.cmake
 
 WORKDIR /usr/src
-# mxe master prior to mingw-w64 update, based on GCC 4
-# with boost fix (a8df43d1)
-RUN git clone https://github.com/mxe/mxe.git
+
+# Build and install CMake from source.
+RUN wget https://cmake.org/files/v3.4/cmake-3.4.2.tar.gz \
+  && tar -xvf cmake-3.4.2.tar.gz \
+  && cd cmake-3.4.2 \
+  && ./bootstrap \
+  && make -j$(nproc) \
+  && make install \
+  && rm -rf * \
+  && cd .. && rm -rf cmake-*

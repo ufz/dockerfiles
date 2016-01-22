@@ -1,4 +1,3 @@
-./clang/push.sh
-./gcc/push.sh
-./mingw/push.sh
-./mingw-32/push.sh
+./clang/build.sh
+./gcc/build.sh
+./mingw/build.sh

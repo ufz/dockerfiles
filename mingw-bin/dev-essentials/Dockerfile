@@ -10,10 +10,14 @@ RUN apt-get update && apt-get -y install \
   rsync \
   vim \
   mxe-x86-64-w64-mingw32.static-gcc \
+  mxe-x86-64-w64-mingw32.static-dlfcn \
+  mxe-i686-w64-mingw32.static-gcc \
+  mxe-i686-w64-mingw32.static-dlfcn \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 ENV CMAKE_TOOLCHAIN_FILE /usr/lib/mxe/usr/x86_64-w64-mingw32.static/share/cmake/mxe-conf.cmake
+ENV CMAKE_TOOLCHAIN_FILE_32 /usr/lib/mxe/usr/i686-w64-mingw32.static/share/cmake/mxe-conf.cmake
 
 WORKDIR /usr/src
 

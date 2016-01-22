@@ -1,4 +1,4 @@
-FROM ogs6/gcc-ogs-base
+FROM ogs6/gcc-base
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update && apt-get install -y \

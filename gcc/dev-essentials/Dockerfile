@@ -15,12 +15,14 @@ RUN apt-get update \
     git \
     curl \
     ccache \
-  && apt-get install -y \
     gcc-4.9 \
     g++-4.9 \
     gcc-4.9-base \
+    python2.7 \
   && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100 \
   && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100 \
+  && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 100 \
+  && update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

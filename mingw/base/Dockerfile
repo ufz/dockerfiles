@@ -1,4 +1,4 @@
-FROM ogs6/mingw-bin-dev-essentials
+FROM ogs6/mingw-dev-essentials
 MAINTAINER Lars Bilke "lars.bilke@ufz.de"
 
 RUN apt-get update && apt-get -y install \

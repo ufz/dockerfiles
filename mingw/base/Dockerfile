@@ -10,3 +10,6 @@ RUN apt-get update && apt-get -y install \
   mxe-i686-w64-mingw32.static-vtk6 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
+
+RUN git config --system user.name Docker \
+  && git config --system user.email docker@localhost

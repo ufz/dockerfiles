@@ -1,4 +1,4 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-$DIR/clang/build.sh
-$DIR/gcc/build.sh
-$DIR/mingw/build.sh
+(cd $DIR/clang && ./build.sh)
+(cd $DIR/gcc && ./build.sh)
+(cd $DIR/mingw && ./build.sh)

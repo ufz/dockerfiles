@@ -19,6 +19,7 @@ RUN apt-get update \
     g++-4.9 \
     gcc-4.9-base \
     python2.7 \
+    doxygen \
   && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100 \
   && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100 \
   && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 100 \

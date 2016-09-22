@@ -29,9 +29,9 @@ RUN apt-get update \
 
 
 # Build and install CMake from source.
-RUN curl -O https://cmake.org/files/v3.4/cmake-3.4.2.tar.gz \
-  && tar -xvf cmake-3.4.2.tar.gz \
-  && cd cmake-3.4.2 \
+RUN curl -O https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz \
+  && tar -xvf cmake-3.6.2.tar.gz \
+  && cd cmake-3.6.2 \
   && ./bootstrap \
   && make -j$(nproc) \
   && make install \

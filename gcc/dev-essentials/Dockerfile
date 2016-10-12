@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update \
@@ -7,7 +7,7 @@ RUN apt-get update \
     wget \
     vim \
   && echo 'deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main' >> /etc/apt/sources.list \
-  && wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add - \
+  && wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|apt-key add - \
   && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
   && apt-get update \
   && apt-get install -y \
@@ -20,6 +20,7 @@ RUN apt-get update \
     gcc-4.9-base \
     python2.7 \
     doxygen \
+    libxml2-utils \
   && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100 \
   && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100 \
   && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 100 \

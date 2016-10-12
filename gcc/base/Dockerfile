@@ -28,4 +28,3 @@ RUN wget http://www.vtk.org/files/release/6.3/VTK-6.3.0.tar.gz && \
 
 ENV CCACHE_DIR=/usr/src/.ccache
 ENV CCACHE_MAXSIZE=15G
-

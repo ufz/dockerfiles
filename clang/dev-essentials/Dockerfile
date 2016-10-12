@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update && apt-get -y install \
@@ -14,9 +14,9 @@ RUN apt-get update && apt-get -y install \
 
 # Build and install CMake from source.
 WORKDIR /usr/src
-RUN wget https://cmake.org/files/v3.4/cmake-3.4.2.tar.gz \
-  && tar -xvf cmake-3.4.2.tar.gz \
-  && cd cmake-3.4.2 \
+RUN wget https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz \
+  && tar -xvf cmake-3.6.2.tar.gz \
+  && cd cmake-3.6.2 \
   && ./bootstrap \
   && make -j$(nproc) \
   && make install \
@@ -24,34 +24,34 @@ RUN wget https://cmake.org/files/v3.4/cmake-3.4.2.tar.gz \
   && cd .. && rm -rf cmake-*
 
 # Install LLVM, see http://llvm.org/docs/CMake.html
-RUN wget http://llvm.org/releases/3.7.0/llvm-3.7.0.src.tar.xz \
-  && tar -Jxf llvm-3.7.0.src.tar.xz \
+RUN wget http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz \
+  && tar -Jxf llvm-3.9.0.src.tar.xz \
   && mkdir build-llvm && cd build-llvm \
-  && cmake ../llvm-3.7.0.src -DCMAKE_BUILD_TYPE=Release \
+  && cmake ../llvm-3.9.0.src -DCMAKE_BUILD_TYPE=Release \
   && make -j$(nproc) install \
-  && cd .. && rm -rf build-llvm llvm-3.7.0.src llvm-3.7.0.src.tar.xz
+  && cd .. && rm -rf build-llvm llvm-3.9.0.src llvm-3.9.0.src.tar.xz
 
 # Clang
-RUN wget http://llvm.org/releases/3.7.0/cfe-3.7.0.src.tar.xz \
-  && tar -Jxf cfe-3.7.0.src.tar.xz \
+RUN wget http://llvm.org/releases/3.9.0/cfe-3.9.0.src.tar.xz \
+  && tar -Jxf cfe-3.9.0.src.tar.xz \
   && mkdir build-cfe && cd build-cfe \
-  && cmake ../cfe-3.7.0.src -DCMAKE_BUILD_TYPE=Release -DLLVM_CONFIG_PATH=/usr/local/bin/llvm-config \
+  && cmake ../cfe-3.9.0.src -DCMAKE_BUILD_TYPE=Release -DLLVM_CONFIG_PATH=/usr/local/bin/llvm-config \
   && make -j$(nproc) install \
-  && cd .. && rm -rf build-cfe cfe-3.7.0.src fe-3.7.0.src.tar.xz
+  && cd .. && rm -rf build-cfe cfe-3.9.0.src fe-3.9.0.src.tar.xz
 
 ENV CC=clang
 ENV CXX=clang++
 
 # Compiler-rt
-RUN wget http://llvm.org/releases/3.7.0/compiler-rt-3.7.0.src.tar.xz \
-  && tar -Jxf compiler-rt-3.7.0.src.tar.xz \
+RUN wget http://llvm.org/releases/3.9.0/compiler-rt-3.9.0.src.tar.xz \
+  && tar -Jxf compiler-rt-3.9.0.src.tar.xz \
   && mkdir build-compiler-rt && cd build-compiler-rt \
-  && cmake ../compiler-rt-3.7.0.src -DCMAKE_BUILD_TYPE=Release -DLLVM_CONFIG_PATH=/usr/local/bin/llvm-config \
+  && cmake ../compiler-rt-3.9.0.src -DCMAKE_BUILD_TYPE=Release -DLLVM_CONFIG_PATH=/usr/local/bin/llvm-config \
   && make -j$(nproc) install \
-  && cd .. && rm -rf build-compiler-rt compiler-rt-3.7.0.src compiler-rt-3.7.0.src.tar.xz
+  && cd .. && rm -rf build-compiler-rt compiler-rt-3.9.0.src compiler-rt-3.9.0.src.tar.xz
 
-RUN mkdir /usr/local/lib/clang/3.7.0/lib
-RUN ln -s /usr/local/lib/linux /usr/local/lib/clang/3.7.0/lib/linux
+RUN mkdir /usr/local/lib/clang/3.9.0/lib
+RUN ln -s /usr/local/lib/linux /usr/local/lib/clang/3.9.0/lib/linux
 
 WORKDIR /usr/src
 

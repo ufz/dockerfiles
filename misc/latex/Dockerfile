@@ -1,6 +1,9 @@
-FROM hiono/texlive
+FROM ubuntu:16.04
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update && apt-get install -y \
-  ghostscript \
-  rm -rf /var/lib/apt/lists/*
+    texlive-full \
+    ghostscript \
+    biber \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*

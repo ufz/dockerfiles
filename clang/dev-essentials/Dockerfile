@@ -14,9 +14,9 @@ RUN apt-get update && apt-get -y install \
 
 # Build and install CMake from source.
 WORKDIR /usr/src
-RUN wget https://cmake.org/files/v3.6/cmake-3.6.2.tar.gz \
-  && tar -xvf cmake-3.6.2.tar.gz \
-  && cd cmake-3.6.2 \
+RUN wget https://cmake.org/files/v3.7/cmake-3.7.1.tar.gz \
+  && tar -xvf cmake-3.7.1.tar.gz \
+  && cd cmake-3.7.1 \
   && ./bootstrap \
   && make -j$(nproc) \
   && make install \

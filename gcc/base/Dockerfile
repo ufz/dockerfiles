@@ -26,9 +26,6 @@ RUN wget http://www.vtk.org/files/release/6.3/VTK-6.3.0.tar.gz && \
   && make -j$(nproc) install \
   && cd .. && rm -rf vtk-build VTK-6.3.0
 
-ENV CCACHE_DIR=/usr/src/.ccache
-ENV CCACHE_MAXSIZE=15G
-
 RUN wget http://www.ssisc.org/lis/dl/lis-1.7.9.tar.gz \
   && tar xf lis-1.7.9.tar.gz \
   && cd lis-1.7.9 \

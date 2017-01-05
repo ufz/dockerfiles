@@ -3,31 +3,24 @@ MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update \
   && apt-get -y install \
-    software-properties-common \
-    wget \
-    vim \
-  && echo 'deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.4 main' >> /etc/apt/sources.list \
-  && wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|apt-key add - \
-  && add-apt-repository -y ppa:ubuntu-toolchain-r/test \
-  && apt-get update \
-  && apt-get install -y \
-    make \
-    git \
-    curl \
+    build-essential \
     ccache \
-    gcc-4.9 \
-    g++-4.9 \
-    gcc-4.9-base \
-    python2.7 \
+    curl \
     doxygen \
+    freeglut3-dev \
+    git \
     libxml2-utils \
-  && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100 \
-  && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100 \
-  && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 100 \
-  && update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100 \
+    libxt-dev \
+    make \
+    python-pip \
+    python2.7 \
+    time \
+    vim \
+    wget \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100
 
 # Build and install CMake from source.
 RUN curl -O https://cmake.org/files/v3.7/cmake-3.7.1.tar.gz \

@@ -3,12 +3,14 @@ MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN apt-get update \
   && apt-get -y install \
-    build-essential \
     ccache \
     cmake \
     curl \
     doxygen \
     freeglut3-dev \
+    gcc-4.9 \
+    g++-4.9 \
+    gcc-4.9-base \
     git \
     libxml2-utils \
     libxt-dev \
@@ -21,7 +23,12 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100
+RUN pip install --upgrade pip
+
+RUN  update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100 \
+  && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100 \
+  && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100 \
+  && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 100
 
 # Add user jenkins to the image
 RUN adduser --uid 500 --quiet jenkins \

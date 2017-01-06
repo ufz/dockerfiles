@@ -5,6 +5,7 @@ RUN apt-get update \
   && apt-get -y install \
     build-essential \
     ccache \
+    cmake \
     curl \
     doxygen \
     freeglut3-dev \
@@ -21,16 +22,6 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100
-
-# Build and install CMake from source.
-RUN curl -O https://cmake.org/files/v3.7/cmake-3.7.1.tar.gz \
-  && tar -xvf cmake-3.7.1.tar.gz \
-  && cd cmake-3.7.1 \
-  && ./bootstrap \
-  && make -j$(nproc) \
-  && make install \
-  && rm -rf * \
-  && cd .. && rm -rf cmake-*
 
 # Add user jenkins to the image
 RUN adduser --uid 500 --quiet jenkins \

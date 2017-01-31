@@ -11,6 +11,7 @@ RUN apt-get update \
     gcc-4.9 \
     g++-4.9 \
     gcc-4.9-base \
+    graphviz \
     git \
     libxml2-utils \
     libxt-dev \

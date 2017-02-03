@@ -3,3 +3,4 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 (cd $DIR/gcc && ./push.sh)
 (cd $DIR/mingw && ./push.sh)
 (cd $DIR/misc && ./push.sh)
+(cd $DIR/web && ./push.sh)

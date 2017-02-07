@@ -37,7 +37,8 @@ RUN pip install --upgrade pip
 RUN  update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100 \
   && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 100 \
   && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100 \
-  && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 100
+  && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 100 \
+  && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
 # Hugo
 RUN wget https://github.com/spf13/hugo/releases/download/v0.18.1/hugo_0.18.1_Linux-64bit.tar.gz \

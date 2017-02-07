@@ -25,6 +25,7 @@ RUN apt-get update \
     npm \
     python-pip \
     python2.7 \
+    sudo \
     time \
     vim \
     wget \

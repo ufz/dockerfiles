@@ -9,10 +9,10 @@ RUN apt-get update && apt-get install -y \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src
-RUN curl -L -o boost_1_56_0.tar.gz http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.gz/download && \
-  tar -xzf boost_1_56_0.tar.gz && \
+RUN curl -L -o boost_1_56_0.tar.bz2 https://ogsstorage.blob.core.windows.net/jenkins/ogs6-lib-sources/boost_1_56_0.tar.bz2 && \
+  tar -xjf boost_1_56_0.tar.bz2 && \
   chmod 755 boost_1_56_0 && \
-  rm boost_1_56_0.tar.gz
+  rm boost_1_56_0.tar.bz2
 ENV BOOST_ROOT=/usr/src/boost_1_56_0
 
 WORKDIR /usr/src

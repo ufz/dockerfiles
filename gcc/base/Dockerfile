@@ -29,3 +29,11 @@ RUN wget http://www.ssisc.org/lis/dl/lis-1.7.9.tar.gz \
   && ./configure \
   && make -j$(nproc) install \
   && cd .. && rm -rf lis-1.7.9
+
+RUN wget https://ogsstorage.blob.core.windows.net/jenkins/ogs6-lib-sources/ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz \
+  && tar xf ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz \
+  && mkdir /usr/local/opt \
+  && mv ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit/ /usr/local/opt/paraview \
+  && rm ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz
+
+ENV PATH=$PATH:/usr/local/opt/paraview/bin

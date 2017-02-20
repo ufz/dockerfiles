@@ -63,8 +63,8 @@ ENV CCACHE_DIR=/usr/src/.ccache
 ENV CCACHE_MAXSIZE=15G
 
 # Add user jenkins to the image
-RUN adduser --uid 500 --quiet jenkins \
+RUN adduser --uid 500 --disabled-password --gecos "" jenkins \
   # Add user jenkins to sudoers with NOPASSWD
   && echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
   # Set password for the jenkins user (you may want to alter this).
-  && RUN echo "jenkins:jenkins" | chpasswd
+  && echo "jenkins:jenkins" | chpasswd

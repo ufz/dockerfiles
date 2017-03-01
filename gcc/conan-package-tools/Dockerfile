@@ -6,6 +6,6 @@ ENV CONAN_UPLOAD=1 \
     CONAN_CHANNEL="testing" \
     CONAN_STABLE_BRANCH_PATTERN="release/*"
 
-RUN pip install conan==0.20.0
+RUN pip install conan==0.20.1
 RUN pip install conan_package_tools
 RUN conan user

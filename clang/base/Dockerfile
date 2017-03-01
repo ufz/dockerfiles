@@ -38,4 +38,4 @@ RUN wget http://www.ssisc.org/lis/dl/lis-1.7.9.tar.gz && \
   && cd lis-1.7.9 \
   && ./configure \
   && make -j$(nproc) install \
-  && cd .. && rm -rf lis-1.7.9
+  && cd .. && rm -rf lis-1.7.9 lis-1.7.9.tar.gz

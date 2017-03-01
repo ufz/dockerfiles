@@ -28,7 +28,7 @@ RUN wget http://www.ssisc.org/lis/dl/lis-1.7.9.tar.gz \
   && cd lis-1.7.9 \
   && ./configure \
   && make -j$(nproc) install \
-  && cd .. && rm -rf lis-1.7.9
+  && cd .. && rm -rf lis-1.7.9 lis-1.7.9.tar.gz
 
 RUN wget https://ogsstorage.blob.core.windows.net/jenkins/ogs6-lib-sources/ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz \
   && tar xf ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz \
@@ -37,3 +37,25 @@ RUN wget https://ogsstorage.blob.core.windows.net/jenkins/ogs6-lib-sources/ParaV
   && rm ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz
 
 ENV PATH=$PATH:/usr/local/opt/paraview/bin
+
+# Google protobuf 3
+RUN apt-get update && apt-get install -y \
+    autoconf \
+    automake \
+    libtool \
+    curl \
+    make \
+    g++ \
+    unzip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN wget https://github.com/google/protobuf/archive/v3.2.0.tar.gz \
+  && tar xf v3.2.0.tar.gz \
+  && cd protobuf-3.2.0 \
+  && ./autogen.sh \
+  && ./configure \
+  && make -j$(nproc) \
+  && sudo make install \
+  && sudo ldconfig \
+  && cd .. && rm -rf protobuf-3.2.0 v3.2.0.tar.gz

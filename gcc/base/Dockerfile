@@ -11,17 +11,17 @@ RUN curl -L -o boost_1_56_0.tar.bz2 https://ogsstorage.blob.core.windows.net/jen
   rm boost_1_56_0.tar.bz2
 ENV BOOST_ROOT=/usr/src/boost_1_56_0
 
-RUN wget http://www.vtk.org/files/release/6.3/VTK-6.3.0.tar.gz && \
-  tar xf VTK-6.3.0.tar.gz && \
-  rm VTK-6.3.0.tar.gz \
+RUN wget http://www.vtk.org/files/release/7.1/VTK-7.1.0.tar.gz && \
+  tar xf VTK-7.1.0.tar.gz && \
+  rm VTK-7.1.0.tar.gz \
   && mkdir vtk-build && cd vtk-build \
-  && cmake ../VTK-6.3.0 \
+  && cmake ../VTK-7.1.0 \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr/local \
     -DBUILD_TESTING=OFF \
     -DModule_vtkIOParallelXML=ON \
   && make -j$(nproc) install \
-  && cd .. && rm -rf vtk-build VTK-6.3.0
+  && cd .. && rm -rf vtk-build VTK-7.1.0
 
 RUN wget http://www.ssisc.org/lis/dl/lis-1.7.9.tar.gz \
   && tar xf lis-1.7.9.tar.gz \

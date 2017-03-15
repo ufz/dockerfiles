@@ -7,5 +7,6 @@ docker build -t ogs6/gcc-base:latest -f $DIR/gcc/base/Dockerfile $DIR
 docker build -t ogs6/clang-dev-essentials:latest -f $DIR/dev-essentials/Dockerfile $DIR
 docker build -t ogs6/clang-base:latest -f $DIR/base/Dockerfile $DIR
 
+(cd $DIR/conan && ./build.sh)
 (cd $DIR/mingw && ./build.sh)
 (cd $DIR/misc && ./build.sh)

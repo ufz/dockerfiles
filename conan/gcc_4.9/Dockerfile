@@ -17,4 +17,5 @@ RUN adduser --uid 500 --disabled-password --gecos "" jenkins \
  && echo "jenkins:jenkins" | chpasswd
 
 WORKDIR /home/jenkins
+USER jenkins
 RUN mkdir -p /home/jenkins/.conan

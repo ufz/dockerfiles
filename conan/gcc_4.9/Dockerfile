@@ -2,7 +2,7 @@ FROM ubuntu:vivid
 
 LABEL maintainer "lars.bilke@ufz.de"
 
-RUN dpkg --add-architecture i386 && rm -rf /var/lib/apt/lists/* && apt-get update && apt-get install -y python-dev sudo build-essential wget git vim libc6-dev-i386 g++-multilib nasm dh-autoreconf valgrind libffi-dev
+RUN dpkg --add-architecture i386 && rm -rf /var/lib/apt/lists/* && apt-get update && apt-get install -y python-dev sudo build-essential wget git vim libc6-dev-i386 g++-multilib nasm dh-autoreconf valgrind libffi-dev libssl-dev
 # RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Install CMake 3
 RUN wget https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz --no-check-certificate && tar -xzf cmake-3.7.2-Linux-x86_64.tar.gz && cp -fR cmake-3.7.2-Linux-x86_64/* /usr && rm -rf cmake-3.7.2-Linux-x86_64 && rm cmake-3.7.2-Linux-x86_64.tar.gz

@@ -61,6 +61,7 @@ RUN apt-get update && apt-get -y install \
   rm -rf /var/lib/apt/lists/*
 ENV CCACHE_DIR=/usr/src/.ccache
 ENV CCACHE_MAXSIZE=15G
+ENV CCACHE_SLOPPINESS=pch_defines,time_macros
 
 # Add user jenkins to the image
 RUN adduser --uid 500 --disabled-password --gecos "" jenkins \

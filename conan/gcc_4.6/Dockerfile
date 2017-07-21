@@ -7,7 +7,7 @@ RUN  apt-get update && apt-get install -y python-dev sudo build-essential wget g
 # Install CMake 3
 RUN wget https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz --no-check-certificate && tar -xzf cmake-3.7.2-Linux-x86_64.tar.gz && cp -fR cmake-3.7.2-Linux-x86_64/* /usr && rm -rf cmake-3.7.2-Linux-x86_64 && rm cmake-3.7.2-Linux-x86_64.tar.gz
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate && python get-pip.py && pip install -U pip
-RUN pip install conan==0.25.0 conan_package_tools
+RUN pip install conan==0.25.1 conan_package_tools
 
 # Add user jenkins to the image
 RUN adduser --uid 500 --disabled-password --gecos "" jenkins \

@@ -45,10 +45,10 @@ RUN  update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100
   && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
 # Hugo
-RUN wget https://github.com/spf13/hugo/releases/download/v0.18.1/hugo_0.18.1_Linux-64bit.tar.gz \
-  && tar xf hugo_0.18.1_Linux-64bit.tar.gz \
-  && mv hugo_0.18.1_linux_amd64/hugo_0.18.1_linux_amd64 /usr/local/bin/hugo \
-  && rm -rf hugo_0.18.1_*
+RUN wget https://github.com/gohugoio/hugo/releases/download/v0.25.1/hugo_0.25.1_Linux-64bit.tar.gz \
+  && tar xf hugo_0.25.1_Linux-64bit.tar.gz \
+  && mv hugo /usr/local/bin/hugo \
+  && rm -rf hugo_0.25.1_Linux-64bit.tar.gz LICENSE.md README.md
 
  # Add user jenkins to the image
 RUN adduser --uid 500 --disabled-password --gecos "" jenkins \

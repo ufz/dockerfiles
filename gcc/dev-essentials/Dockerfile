@@ -25,6 +25,7 @@ RUN apt-get update \
     make \
     nodejs \
     npm \
+    pandoc-citeproc \
     python-pip \
     python2.7 \
     sudo \

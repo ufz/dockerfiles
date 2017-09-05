@@ -8,6 +8,7 @@ USER jenkins
 ENV CONAN_UPLOAD=1 \
     CONAN_USERNAME="bilke" \
     CONAN_CHANNEL="testing" \
-    CONAN_STABLE_BRANCH_PATTERN="release/*"
+    CONAN_STABLE_BRANCH_PATTERN="release/*" \
+    CC=gcc
 
 RUN conan remote add -i 0 ogs https://api.bintray.com/conan/ogs/conan

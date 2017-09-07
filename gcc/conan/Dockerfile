@@ -11,4 +11,4 @@ ENV CONAN_UPLOAD=1 \
     CONAN_STABLE_BRANCH_PATTERN="release/*" \
     CC=gcc
 
-RUN conan remote add -i 0 ogs https://api.bintray.com/conan/ogs/conan
+RUN conan remote add -i 0 ogs https://ogs.jfrog.io/ogs/api/conan/conan

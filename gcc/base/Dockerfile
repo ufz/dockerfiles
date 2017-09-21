@@ -21,8 +21,6 @@ RUN wget https://ogsstorage.blob.core.windows.net/jenkins/ogs6-lib-sources/ParaV
   && mv ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit/ /usr/local/opt/paraview \
   && rm ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz
 
-ENV PATH=$PATH:/usr/local/opt/paraview/bin
-
 # Google protobuf 3
 RUN apt-get update && apt-get install -y \
     autoconf \
@@ -44,3 +42,11 @@ RUN wget https://github.com/google/protobuf/archive/v3.2.0.tar.gz \
   && sudo make install \
   && sudo ldconfig \
   && cd .. && rm -rf protobuf-3.2.0 v3.2.0.tar.gz
+
+USER jenkins
+WORKDIR /home/jenkins
+
+ENV PATH=$PATH:/usr/local/opt/paraview/bin
+ENV CCACHE_DIR=/usr/src/.ccache
+ENV CCACHE_MAXSIZE=15G
+ENV CCACHE_SLOPPINESS=pch_defines,time_macros

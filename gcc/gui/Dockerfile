@@ -1,6 +1,8 @@
 FROM ogs6/gcc-base
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
+USER root
+
 RUN apt-get update && apt-get install -y \
   biber \
   qtbase5-dev \
@@ -10,4 +12,5 @@ RUN apt-get update && apt-get install -y \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/src
+USER jenkins
+WORKDIR /home/jenkins

@@ -47,6 +47,3 @@ USER jenkins
 WORKDIR /home/jenkins
 
 ENV PATH=$PATH:/usr/local/opt/paraview/bin
-ENV CCACHE_DIR=/usr/src/.ccache
-ENV CCACHE_MAXSIZE=15G
-ENV CCACHE_SLOPPINESS=pch_defines,time_macros

@@ -1,3 +1,4 @@
+#!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 (cd $DIR/clang && ./push.sh)
 (cd $DIR/conan && ./push.sh)

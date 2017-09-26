@@ -7,6 +7,7 @@ RUN apt-get update \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" \
      | tee /etc/apt/sources.list.d/yarn.list \
   && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
+  && curl -s https://deb.nodesource.com/setup_6.x | bash \
   && apt-get update \
   && apt-get -y install \
     ccache \
@@ -24,7 +25,6 @@ RUN apt-get update \
     libxt-dev \
     make \
     nodejs \
-    npm \
     pandoc-citeproc \
     python-pip \
     python2.7 \

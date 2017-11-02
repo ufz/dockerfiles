@@ -30,6 +30,7 @@ RUN apt-get update \
     python2.7 \
     sudo \
     time \
+    unzip \
     vim \
     wget \
     yarn \
@@ -43,6 +44,12 @@ RUN  update-alternatives --install /usr/bin/python python /usr/bin/python2.7 100
   && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 100 \
   && update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 100 \
   && update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+
+# Ninja
+RUN wget https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip \
+  && unzip ninja-linux.zip \
+  && mv ninja /usr/local/bin/ninja \
+  && rm ninja-linux.zip
 
 # Hugo
 RUN wget https://github.com/gohugoio/hugo/releases/download/v0.27.1/hugo_0.27.1_Linux-64bit.tar.gz \

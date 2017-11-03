@@ -15,11 +15,11 @@ RUN ./scripts/install-vtk.sh /usr/local 7.1
 
 RUN ./scripts/install-lis.sh 1.7.9
 
-RUN wget https://ogsstorage.blob.core.windows.net/jenkins/ogs6-lib-sources/ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz \
-  && tar xf ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz \
+RUN wget https://www.paraview.org/paraview-downloads/download.php\?submit\=Download\&version\=v5.4\&type\=binary\&os\=Linux\&downloadFile\=ParaView-5.4.1-Qt5-OpenGL2-MPI-Linux-64bit.tar.gz -O ParaView-5.4.1-Qt5-OpenGL2-MPI-Linux-64bit.tar.gz \
+  && tar xf ParaView-5.4.1-Qt5-OpenGL2-MPI-Linux-64bit.tar.gz \
   && mkdir /usr/local/opt \
-  && mv ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit/ /usr/local/opt/paraview \
-  && rm ParaView-5.2.0-Qt4-OpenGL2-MPI-Linux-64bit.tar.gz
+  && mv ParaView-5.4.1-Qt5-OpenGL2-MPI-Linux-64bit/ /usr/local/opt/paraview \
+  && rm ParaView-5.4.1-Qt5-OpenGL2-MPI-Linux-64bit.tar.gz
 
 # Google protobuf 3
 RUN apt-get update && apt-get install -y \

@@ -1,15 +1,12 @@
 FROM ogs6/gcc-dev-essentials
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
-RUN apt-get update && apt-get -y install libeigen3-dev \
+RUN apt-get update && apt-get -y install libeigen3-dev libboost-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /usr/src
 
 ADD scripts/ scripts/
-
-RUN ./scripts/install-boost.sh /usr/local/
-ENV BOOST_ROOT=/usr/local/boost_1_56_0
 
 RUN ./scripts/install-vtk.sh /usr/local 7.1
 

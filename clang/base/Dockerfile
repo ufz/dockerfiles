@@ -9,12 +9,5 @@ RUN apt-get update && apt-get install -y \
   rm -rf /var/lib/apt/lists/*
 
 ADD scripts/ scripts/
-
-RUN ./scripts/install-boost.sh /usr/local/
-ENV BOOST_ROOT=/usr/local/boost_1_56_0
-
-RUN ./scripts/install-vtk.sh /usr/local 7.1
-
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-
 RUN ./scripts/install-lis.sh 1.7.9

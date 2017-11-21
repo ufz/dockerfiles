@@ -56,12 +56,19 @@ RUN ln -s /usr/local/lib/linux /usr/local/lib/clang/3.9.0/lib/linux
 WORKDIR /usr/src
 
 RUN apt-get update && apt-get -y install \
+  unzip \
   ccache && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 ENV CCACHE_DIR=/usr/src/.ccache
 ENV CCACHE_MAXSIZE=15G
 ENV CCACHE_SLOPPINESS=pch_defines,time_macros
+
+# Ninja
+RUN wget https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip \
+  && unzip ninja-linux.zip \
+  && mv ninja /usr/local/bin/ninja \
+  && rm ninja-linux.zip
 
 # Add user jenkins to the image
 RUN adduser --uid 500 --disabled-password --gecos "" jenkins \

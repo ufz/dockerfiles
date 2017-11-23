@@ -1,7 +1,7 @@
 FROM ogs6/gcc-dev-essentials
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
-RUN pip install conan==0.28.1
+RUN pip install conan==0.29.0
 
 USER jenkins
 

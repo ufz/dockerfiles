@@ -4,7 +4,8 @@ MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 RUN apt-get update && apt-get -y install \
   build-essential \
   git \
-  python \
+  python-pip \
+  python2.7 \
   wget \
   rsync \
   xz-utils \
@@ -69,6 +70,8 @@ RUN wget https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-lin
   && unzip ninja-linux.zip \
   && mv ninja /usr/local/bin/ninja \
   && rm ninja-linux.zip
+
+RUN pip install conan==0.29.0
 
 # Add user jenkins to the image
 RUN adduser --uid 500 --disabled-password --gecos "" jenkins \

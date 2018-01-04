@@ -13,16 +13,8 @@ RUN apt-get update && apt-get -y install \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-# Build and install CMake from source.
-WORKDIR /usr/src
-RUN wget https://cmake.org/files/v3.7/cmake-3.7.1.tar.gz \
-  && tar -xvf cmake-3.7.1.tar.gz \
-  && cd cmake-3.7.1 \
-  && ./bootstrap \
-  && make -j$(nproc) \
-  && make install \
-  && rm -rf * \
-  && cd .. && rm -rf cmake-*
+RUN pip install conan==0.30.3 cmake
+ENV CONAN_SYSREQUIRES_SUDO=0
 
 # Install LLVM, see http://llvm.org/docs/CMake.html
 RUN wget http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz \
@@ -70,8 +62,6 @@ RUN wget https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-lin
   && unzip ninja-linux.zip \
   && mv ninja /usr/local/bin/ninja \
   && rm ninja-linux.zip
-
-RUN pip install conan==0.29.0
 
 # Add user jenkins to the image
 RUN adduser --uid 500 --disabled-password --gecos "" jenkins \

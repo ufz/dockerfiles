@@ -3,6 +3,7 @@ MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
 RUN sudo apt-get update && apt-get install -y \
   curl \
+  sudo \
   time \
   freeglut3-dev && \
   apt-get clean && \

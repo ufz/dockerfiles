@@ -1,7 +1,7 @@
 FROM ogs6/clang-dev-essentials
 MAINTAINER Lars Bilke <lars.bilke@ufz.de>
 
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && apt-get install -y \
   curl \
   time \
   freeglut3-dev && \

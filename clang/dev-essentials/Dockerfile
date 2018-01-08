@@ -14,7 +14,6 @@ RUN apt-get update && apt-get -y install \
   rm -rf /var/lib/apt/lists/*
 
 RUN pip install conan==0.30.3 cmake
-ENV CONAN_SYSREQUIRES_SUDO=0
 
 # Install LLVM, see http://llvm.org/docs/CMake.html
 RUN wget http://llvm.org/releases/3.9.0/llvm-3.9.0.src.tar.xz \
@@ -69,3 +68,6 @@ RUN adduser --uid 500 --disabled-password --gecos "" jenkins \
   && echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
   # Set password for the jenkins user (you may want to alter this).
   && echo "jenkins:jenkins" | chpasswd
+
+USER jenkins
+WORKDIR /home/jenkins

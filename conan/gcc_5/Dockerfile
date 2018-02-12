@@ -8,6 +8,7 @@ RUN adduser --uid 500 --disabled-password --gecos "" jenkins \
   && echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
   # Set password for the jenkins user (you may want to alter this).
   && echo "jenkins:jenkins" | chpasswd
+RUN pip install -q --no-cache-dir --upgrade conan
 
 USER jenkins
 WORKDIR /home/jenkins

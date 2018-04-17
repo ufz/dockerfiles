@@ -2,13 +2,27 @@ properties([parameters([
   booleanParam(defaultValue: false, description: '', name: 'nocache')
 ])])
 
-node('docker') {
-	stage('Checkout') { checkout scm }
-	stage('Build') {
-    if(params.nocache)
-      sh './build.sh --no-cache'
-    else
-      sh './build.sh'
+def dockerfiles = [
+    'conan/clang39',
+    'conan/gcc49',
+    'conan/gcc5',
+    'conan/gcc6',
+    'conan/gcc7'
+]
+def jobs = [:]
+dockerfiles.each {
+  jobs["${it}"] = {
+    node('docker') {
+      checkout scm
+      dir ("${it}") {
+        def imagename = it.replace("/", "_")
+        image = docker.build("ogs6/${imagename}")
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+          image.push()
+          // image.push("${env.BUILD_NUMBER}") // second image fails somehow ...
+        }
+      }
+    }
   }
-	stage('Push') { sh './push.sh' }
 }
+parallel jobs

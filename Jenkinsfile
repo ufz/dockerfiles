@@ -2,7 +2,7 @@ properties([parameters([
   booleanParam(defaultValue: false, description: '', name: 'nocache')
 ])])
 
-node('docker1') {
+node('docker') {
 	stage('Checkout') { checkout scm }
 	stage('Build') {
     if(params.nocache)

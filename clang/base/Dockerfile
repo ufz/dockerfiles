@@ -1,5 +1,5 @@
 FROM ogs6/clang-dev-essentials
-MAINTAINER Lars Bilke <lars.bilke@ufz.de>
+LABEL maintainer="lars.bilke@ufz.de"
 
 RUN sudo apt-get update && apt-get install -y \
   curl \

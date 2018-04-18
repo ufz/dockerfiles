@@ -1,5 +1,5 @@
 FROM ogs6/gcc-dev-essentials
-MAINTAINER Lars Bilke <lars.bilke@ufz.de>
+LABEL maintainer="lars.bilke@ufz.de"
 
 ENV CONAN_USERNAME="bilke" \
     CONAN_CHANNEL="testing" \

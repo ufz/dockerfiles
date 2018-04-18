@@ -1,5 +1,5 @@
 FROM ogs6/gcc-conan-package-tools
-MAINTAINER Lars Bilke <lars.bilke@ufz.de>
+LABEL maintainer="lars.bilke@ufz.de"
 
 RUN apt-get update && apt-get install -y \
     libxcb1 \

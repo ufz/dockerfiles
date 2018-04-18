@@ -1,5 +1,5 @@
 FROM lasote/conanclang39
-MAINTAINER Lars Bilke <lars.bilke@ufz.de>
+LABEL maintainer="lars.bilke@ufz.de"
 
 # Add user jenkins to the image
 USER root

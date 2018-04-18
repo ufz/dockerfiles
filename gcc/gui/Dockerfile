@@ -1,5 +1,5 @@
 FROM ogs6/gcc-base
-MAINTAINER Lars Bilke <lars.bilke@ufz.de>
+LABEL maintainer="lars.bilke@ufz.de"
 
 USER root
 

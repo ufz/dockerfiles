@@ -1,5 +1,5 @@
 FROM ogs6/gcc-dev-essentials
-MAINTAINER Lars Bilke <lars.bilke@ufz.de>
+LABEL maintainer="lars.bilke@ufz.de"
 
 RUN apt-get update && apt-get install -y \
   libopenmpi-dev \

@@ -1,5 +1,5 @@
 FROM ogs6/gcc-dev-essentials
-MAINTAINER Lars Bilke <lars.bilke@ufz.de>
+LABEL maintainer="lars.bilke@ufz.de"
 
 RUN apt-get update && apt-get -y install libeigen3-dev libboost-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/*

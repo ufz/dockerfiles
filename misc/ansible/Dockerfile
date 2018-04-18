@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y \
   --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
+RUN easy_install -U pip && pip install ansible[azure]
+
 # Add user jenkins to the image
 RUN adduser --uid 500 --disabled-password --gecos "" jenkins \
   # Add user jenkins to sudoers with NOPASSWD

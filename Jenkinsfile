@@ -8,7 +8,8 @@ def dockerfiles = [
     'conan/gcc5',
     'conan/gcc6',
     'conan/gcc7',
-    'misc/ansible'
+    'misc/ansible',
+    'jenkins/gcc/full'
 ]
 def jobs = [:]
 dockerfiles.each {

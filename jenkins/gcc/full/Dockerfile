@@ -58,6 +58,8 @@ RUN curl https://include-what-you-use.org/downloads/include-what-you-use-0.8-x86
   && tar xf include-what-you-use-0.8-x86_64-linux-gnu-ubuntu-16.04.tar.gz -C /usr/ --strip-components=1 \
   && rm include-what-you-use-0.8-x86_64-linux-gnu-ubuntu-16.04.tar.gz
 
+RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 USER jenkins
 
 ENV CCACHE_DIR=/home/jenkins/cache/ccache

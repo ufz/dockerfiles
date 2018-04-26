@@ -69,4 +69,4 @@ ENV CCACHE_SLOPPINESS=pch_defines,time_macros
 ENV CONAN_USER_HOME=/home/jenkins/cache/conan
 RUN conan user
 
-USER root
+COPY setup-sshd /usr/local/bin/setup-sshd

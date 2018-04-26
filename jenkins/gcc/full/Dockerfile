@@ -59,10 +59,6 @@ RUN curl https://include-what-you-use.org/downloads/include-what-you-use-0.8-x86
   && rm include-what-you-use-0.8-x86_64-linux-gnu-ubuntu-16.04.tar.gz
 
 RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-# HACK: the entry point setup-sshd from base image writes to environment but is
-# asssumed to run as root. maybe a bug in the base image, see
-# https://github.com/jenkinsci/docker-ssh-slave/issues/16
-RUN chmod a+w /etc/environment
 
 USER jenkins
 
@@ -72,3 +68,5 @@ ENV CCACHE_MAXSIZE=15G
 ENV CCACHE_SLOPPINESS=pch_defines,time_macros
 ENV CONAN_USER_HOME=/home/jenkins/cache/conan
 RUN conan user
+
+USER root

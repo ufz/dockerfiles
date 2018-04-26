@@ -1,10 +1,5 @@
 FROM jenkins/ssh-slave
 
-USER root
-
-#RUN sh -c "echo deb http://ftp.us.debian.org/debian/ jessie main contrib non-free > /etc/apt/sources.list"
-#RUN sh -c "echo deb-src http://ftp.us.debian.org/debian/ jessie main contrib non-free > /etc/apt/sources.list"
-
 RUN apt-get update && apt-get install -y curl \
   && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 RUN apt-get update \
@@ -60,13 +55,11 @@ RUN curl https://include-what-you-use.org/downloads/include-what-you-use-0.8-x86
 
 RUN echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER jenkins
-
 ENV CCACHE_DIR=/home/jenkins/cache/ccache
-RUN mkdir -p $CCACHE_DIR
 ENV CCACHE_MAXSIZE=15G
 ENV CCACHE_SLOPPINESS=pch_defines,time_macros
 ENV CONAN_USER_HOME=/home/jenkins/cache/conan
-RUN conan user
+
+USER jenkins
 
 COPY setup-sshd /usr/local/bin/setup-sshd

@@ -18,7 +18,7 @@ dockerfiles.each {
       checkout scm
       dir ("${it}") {
         def imagename = it.replace("/", "_")
-        image = docker.build("ogs6/${imagename}")
+        image = docker.build("ogs6/${imagename}", "--pull .")
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
           image.push()
           // image.push("${env.BUILD_NUMBER}") // second image fails somehow ...
